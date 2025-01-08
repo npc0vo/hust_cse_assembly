@@ -95,6 +95,32 @@ INPUT_LOOP:
 
     ;;//TEMPLATE BEGIN
     ;;//书写代码
+    ; 初始化需要的寄存器
+    xor cx, cx
+    xor si, si
+    xor dx, dx
+    mov si ,0
+loop:
+    mov al, ARRAY[si]
+    cmp al,2
+    jz add_prime
+    cmp al,3
+    jz add_prime
+    cmp al,5
+    jz add_prime
+    cmp al,7
+    jz add_prime
+    add NONPRIME_SUM,al
+    jmp next_elem
+add_prime:
+    add PRIME_SUM,al
+next_elem:
+    inc si
+    cmp si,LEN
+    jle loop
+
+    mov dl,NONPRIME_SUM
+    sub dl,PRIME_SUM
     ;;//TEMPLATE END
 
 ;;//APPEND BEGIN
